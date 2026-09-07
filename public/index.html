@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TravelGo - Explore the World</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold" href="#home">
+                ✈️ TravelGo
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+
+                <ul class="navbar-nav ms-auto align-items-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destinations">Destinations</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#packages">Packages</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <button class="btn btn-outline-light btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#bookingsModal" onclick="fetchBookings()">
+                            📋 View Bookings
+                        </button>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <p class="welcome-text">
+                WELCOME TO TRAVELGO
+            </p>
+
+            <h1>
+                Explore The World 🌎
+            </h1>
+
+            <p class="hero-text">
+                Discover amazing places and create
+                unforgettable memories.
+            </p>
+
+            <a href="#destinations" class="btn explore-btn">
+                Explore Now ✈️
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Popular Destinations 🌍
+            </h2>
+
+            <p class="section-description">
+                Discover some of the most beautiful places
+                around the world.
+            </p>
+
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="card destination-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80"
+                            class="card-img-top"
+                            alt="Bali">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                🌴 Bali
+                            </h5>
+
+                            <p class="card-text">
+                                Beautiful beaches, tropical views
+                                and relaxing resorts.
+                            </p>
+
+                            <button
+                                class="btn view-btn"
+                                onclick="showDestination('Bali')">
+
+                                View More
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="card destination-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80"
+                            class="card-img-top"
+                            alt="Paris">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                🗼 Paris
+                            </h5>
+
+                            <p class="card-text">
+                                Experience art, culture and
+                                the famous Eiffel Tower.
+                            </p>
+
+                            <button
+                                class="btn view-btn"
+                                onclick="showDestination('Paris')">
+
+                                View More
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="card destination-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=600&q=80"
+                            class="card-img-top"
+                            alt="Switzerland">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                🏔️ Switzerland
+                            </h5>
+
+                            <p class="card-text">
+                                Enjoy beautiful mountains,
+                                snow and peaceful scenery.
+                            </p>
+
+                            <button
+                                class="btn view-btn"
+                                onclick="showDestination('Switzerland')">
+
+                                View More
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="card destination-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80"
+                            class="card-img-top"
+                            alt="Maldives">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                🏝️ Maldives
+                            </h5>
+
+                            <p class="card-text">
+                                Relax on beautiful beaches
+                                with crystal-clear water.
+                            </p>
+
+                            <button
+                                class="btn view-btn"
+                                onclick="showDestination('Maldives')">
+
+                                View More
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Packages Section -->
+    <section id="packages" class="packages">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Travel Packages 💜
+            </h2>
+
+            <p class="section-description">
+                Choose a package that suits your travel plans.
+            </p>
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-md-4">
+
+                    <div class="package-card">
+
+                        <h3>
+                            🌱 Basic
+                        </h3>
+
+                        <h4>
+                            ₹9,999
+                        </h4>
+
+                        <p>
+                            3 Days / 2 Nights
+                        </p>
+
+                        <hr>
+
+                        <p>✔ Hotel Stay</p>
+                        <p>✔ Local Sightseeing</p>
+                        <p>✔ Breakfast</p>
+
+                        <a
+                            href="#contact"
+                            class="btn package-btn"
+                            onclick="selectPackage('Basic', 'Bali')">
+
+                            Book Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="package-card popular">
+
+                        <span class="popular-label">
+                            POPULAR
+                        </span>
+
+                        <h3>
+                            ⭐ Standard
+                        </h3>
+
+                        <h4>
+                            ₹19,999
+                        </h4>
+
+                        <p>
+                            5 Days / 4 Nights
+                        </p>
+
+                        <hr>
+
+                        <p>✔ Hotel Stay</p>
+                        <p>✔ Sightseeing</p>
+                        <p>✔ Breakfast & Dinner</p>
+
+                        <a
+                            href="#contact"
+                            class="btn package-btn"
+                            onclick="selectPackage('Standard', 'Paris')">
+
+                            Book Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-4">
+
+                    <div class="package-card">
+
+                        <h3>
+                            👑 Premium
+                        </h3>
+
+                        <h4>
+                            ₹29,999
+                        </h4>
+
+                        <p>
+                            7 Days / 6 Nights
+                        </p>
+
+                        <hr>
+
+                        <p>✔ Luxury Hotel</p>
+                        <p>✔ Private Tour</p>
+                        <p>✔ All Meals</p>
+
+                        <a
+                            href="#contact"
+                            class="btn package-btn"
+                            onclick="selectPackage('Premium', 'Switzerland')">
+
+                            Book Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Contact / Booking Section -->
+    <section id="contact" class="contact-section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Plan Your Trip ✈️
+            </h2>
+
+            <p class="section-description">
+                Fill in the form to send us your travel request.
+            </p>
+
+            <div class="contact-box">
+
+                <form id="bookingForm">
+
+                    <div class="mb-3">
+
+                        <label for="name" class="form-label">
+                            Name <span class="text-danger">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-control"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="email" class="form-label">
+                            Email <span class="text-danger">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="destination" class="form-label">
+                            Destination <span class="text-danger">*</span>
+                        </label>
+
+                        <select
+                            id="destination"
+                            name="destination"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+                                Select a destination
+                            </option>
+
+                            <option value="Bali">
+                                🌴 Bali
+                            </option>
+
+                            <option value="Paris">
+                                🗼 Paris
+                            </option>
+
+                            <option value="Switzerland">
+                                🏔️ Switzerland
+                            </option>
+
+                            <option value="Maldives">
+                                🏝️ Maldives
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="message" class="form-label">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            class="form-control"
+                            rows="4"
+                            placeholder="Tell us about your trip (travel dates, number of guests, preferences)..."></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn submit-btn">
+
+                        <span id="submitBtnText">Submit Booking ✈️</span>
+                        <span id="submitSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
+
+                    </button>
+
+                </form>
+
+
+                <div
+                    id="successMessage"
+                    class="success-message">
+
+                    <div class="fw-bold mb-1">
+                        🎉 Booking Request Submitted Successfully!
+                    </div>
+                    <div id="bookingDetailsText" class="small">
+                        Your booking has been saved to the database.
+                    </div>
+
+                </div>
+
+                <div
+                    id="errorMessage"
+                    class="alert alert-danger mt-3 d-none"
+                    role="alert">
+                    ⚠️ Error submitting booking. Please check connection.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Bookings Modal (Admin / Live DB Inspector) -->
+    <div class="modal fade" id="bookingsModal" tabindex="-1" aria-labelledby="bookingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background: linear-gradient(90deg, #6c5ce7, #a855f7);">
+                    <h5 class="modal-title fw-bold" id="bookingsModalLabel">
+                        📋 Database Bookings Record
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <small class="text-muted">
+                            Data synced live with MySQL Database (<code>travelgo_db.bookings</code>)
+                        </small>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="fetchBookings()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+
+                    <div id="bookingsLoading" class="text-center py-4 d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Destination</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-3">Click refresh to load bookings...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            ✈️ TravelGo
+        </p>
+
+        <small>
+            Explore • Travel • Enjoy 🌎
+        </small>
+
+    </footer>
+
+
+    <!-- Bootstrap JS Bundle -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
