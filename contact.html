@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelGo | Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Travel<span>Go</span></a>
+
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+        <div class="nav-menu" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="packages.html">Packages</a>
+            <a href="about.html">About</a>
+            <a href="contact.html" class="active">Contact</a>
+            <a href="signin.html" class="nav-signin">Sign In</a>
+            <a href="signup.html" class="nav-signup">Sign Up</a>
+        </div>
+    </nav>
+</header>
+
+<section class="page-header contact-header">
+
+    <div>
+        <p>LET'S TALK</p>
+        <h1>Plan Your <span>Adventure</span></h1>
+        <p>Have a question? We would love to hear from you.</p>
+    </div>
+
+</section>
+
+<section class="section contact-section">
+
+    <div class="contact-info">
+
+        <p class="section-label">GET IN TOUCH</p>
+
+        <h2>Let's Make Your <span>Trip Amazing</span></h2>
+
+        <p>
+            Tell us where you want to go and what kind of
+            experience you are looking for.
+        </p>
+
+        <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div>
+                <h3>Email</h3>
+                <p>hello@travelgo.com</p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-icon">☎</div>
+            <div>
+                <h3>Phone</h3>
+                <p>+91 98765 43210</p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-icon">⌖</div>
+            <div>
+                <h3>Location</h3>
+                <p>Coimbatore, India</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="contact-form-box">
+
+        <form id="contactForm">
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" required placeholder="Enter your email">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>Destination</label>
+
+                <select required>
+                    <option value="">Select Destination</option>
+                    <option>Bali</option>
+                    <option>Paris</option>
+                    <option>Dubai</option>
+                    <option>Tokyo</option>
+                    <option>Italy</option>
+                    <option>Maldives</option>
+                    <option>London</option>
+                    <option>New York</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+
+                <textarea
+                    rows="6"
+                    required
+                    placeholder="Tell us about your travel plans..."
+                ></textarea>
+            </div>
+
+            <button type="submit" class="btn primary-btn form-btn">
+                Send Message
+            </button>
+
+            <div id="contactSuccess" class="success-message">
+                Your message has been sent successfully!
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+            <a href="index.html" class="logo">
+                Travel<span>Go</span>
+            </a>
+
+            <p>Making your travel dreams a beautiful reality.</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="packages.html">Packages</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 TravelGo. All Rights Reserved.
+    </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
