@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TravelGo - Contact & Booking</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+
+        <div class="container">
+
+            <a class="navbar-brand fw-bold" href="index.html">
+                ✈️ TravelGo
+            </a>
+
+            <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+
+                <ul class="navbar-nav ms-auto align-items-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="destinations.html">
+                            Destinations
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="packages.html">
+                            Packages
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <button class="btn btn-outline-light btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#bookingsModal" onclick="fetchBookings()">
+                            📋 View Bookings
+                        </button>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Page Header -->
+    <section class="page-header">
+
+        <div class="container">
+
+            <h1>
+                Plan Your Trip ✈️
+            </h1>
+
+            <p>
+                Tell us where you want to go! All bookings are saved directly to MySQL.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Booking Form Section -->
+    <section class="contact-section">
+
+        <div class="container">
+
+            <div class="contact-box">
+
+                <h2>
+                    Booking Form
+                </h2>
+
+                <p>
+                    Fill in the details below to record your travel request.
+                </p>
+
+
+                <form id="bookingForm">
+
+                    <div class="mb-3">
+
+                        <label for="name" class="form-label">
+                            Name <span class="text-danger">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-control"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="email" class="form-label">
+                            Email <span class="text-danger">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="destination" class="form-label">
+                            Destination <span class="text-danger">*</span>
+                        </label>
+
+                        <select
+                            id="destination"
+                            name="destination"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+                                Select a destination
+                            </option>
+
+                            <option value="Bali">
+                                🌴 Bali
+                            </option>
+
+                            <option value="Paris">
+                                🗼 Paris
+                            </option>
+
+                            <option value="Switzerland">
+                                🏔️ Switzerland
+                            </option>
+
+                            <option value="Maldives">
+                                🏝️ Maldives
+                            </option>
+
+                            <option value="Japan">
+                                🗾 Japan
+                            </option>
+
+                            <option value="Dubai">
+                                🏙️ Dubai
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label for="message" class="form-label">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            class="form-control"
+                            rows="4"
+                            placeholder="Tell us about your trip (travel dates, number of guests, preferences)..."></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="btn submit-btn">
+
+                        <span id="submitBtnText">Submit Booking ✈️</span>
+                        <span id="submitSpinner" class="spinner-border spinner-border-sm d-none ms-2" role="status"></span>
+
+                    </button>
+
+                </form>
+
+
+                <div
+                    id="successMessage"
+                    class="success-message">
+
+                    <div class="fw-bold mb-1">
+                        🎉 Booking Request Submitted Successfully!
+                    </div>
+                    <div id="bookingDetailsText" class="small">
+                        Your booking has been recorded in the database.
+                    </div>
+
+                </div>
+
+                <div
+                    id="errorMessage"
+                    class="alert alert-danger mt-3 d-none"
+                    role="alert">
+                    ⚠️ Error submitting booking. Please check connection.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Bookings Modal (Live MySQL Inspector) -->
+    <div class="modal fade" id="bookingsModal" tabindex="-1" aria-labelledby="bookingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background: linear-gradient(90deg, #6c5ce7, #a855f7);">
+                    <h5 class="modal-title fw-bold" id="bookingsModalLabel">
+                        📋 Database Bookings Record
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <small class="text-muted">
+                            Synced live with MySQL Database (<code>travelgo_db.bookings</code>)
+                        </small>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="fetchBookings()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+
+                    <div id="bookingsLoading" class="text-center py-4 d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Destination</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-3">Click refresh to load bookings...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>✈️ TravelGo</p>
+
+        <small>
+            Explore • Travel • Enjoy 🌎
+        </small>
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

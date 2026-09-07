@@ -1,17 +1,23 @@
 # ✈️ TravelGo - Explore the World (Full-Stack Edition)
 
-A full-stack travel booking web application featuring a modern responsive user interface, **Node.js/Express** backend, and **MySQL** database integration designed for **MySQL Workbench**.
+A full-stack travel booking web application featuring a modern multi-page user interface, **Node.js/Express** backend, and **MySQL** database integration designed for **MySQL Workbench**.
 
 ---
 
 ## 🌟 Features
 
-- **Responsive Frontend**: Built with HTML5, CSS3, Bootstrap 5, and JavaScript.
+- **Multi-Page Architecture**:
+  - 🏠 **Home** (`index.html`): Hero showcase, feature highlights, and package previews.
+  - 🌍 **Destinations** (`destinations.html`): 6 curated destinations (Bali, Paris, Switzerland, Maldives, Japan, Dubai) with one-click trip planning.
+  - 💜 **Packages** (`packages.html`): Basic, Standard, and Premium travel deals with pre-filled booking links.
+  - 😊 **About Us** (`about.html`): Company overview, traveler statistics, and core values.
+  - ✈️ **Contact & Booking** (`contact.html`): Live booking form connected directly to MySQL.
 - **RESTful Backend**: Node.js and Express API server handling booking submissions, destination catalogs, and queries.
 - **MySQL Database**: Complete relational database schema with `travelgo_db.bookings` and `destinations`.
 - **MySQL Workbench Ready**: Includes pre-formatted `database.sql` script ready to run with one click.
-- **Live Booking Inspector**: Interactive modal on the website displaying bookings synced live with MySQL.
-- **Graceful Fallback**: Server runs reliably even before database configuration, seamlessly switching to MySQL once credentials are provided.
+- **Live Booking Inspector**: Interactive modal accessible across all pages displaying bookings synced live with MySQL.
+- **Smart URL Pre-filling**: Selecting a destination or package automatically pre-selects and pre-fills the booking form on the contact page.
+- **Resilient Fallback**: Server runs reliably even before database configuration, seamlessly switching to MySQL once credentials are provided.
 
 ---
 
@@ -31,7 +37,11 @@ TRAVELGO_UPDATED/
 │   ├── launch.json
 │   └── settings.json
 └── public/                # Frontend web application
-    ├── index.html         # Main website page & booking form
+    ├── index.html         # Home page
+    ├── destinations.html  # Destinations catalog (6 destinations)
+    ├── packages.html      # Travel package deals
+    ├── about.html         # About TravelGo & stats
+    ├── contact.html       # Booking & contact form (MySQL connected)
     ├── style.css          # Custom styling & responsive layouts
     └── script.js          # Interactive UI and backend API client
 ```
@@ -98,9 +108,9 @@ npm run test-db
 Open your web browser and navigate to:
 👉 **[http://localhost:3000](http://localhost:3000)**
 
-- Explore destinations and packages.
-- Fill in the **Plan Your Trip** booking form and click **Submit Booking ✈️**.
-- Click **📋 View Bookings** in the navigation bar to see your booking stored live in the database!
+- Browse **Home**, **Destinations**, **Packages**, and **About**.
+- Fill in the **Contact / Booking Form** and click **Submit Booking ✈️**.
+- Click **📋 View Bookings** in the navigation bar from any page to see bookings stored live in the database!
 - Check your records inside **MySQL Workbench** by running:
   ```sql
   SELECT * FROM travelgo_db.bookings ORDER BY created_at DESC;
@@ -116,7 +126,7 @@ Open your web browser and navigate to:
 | `POST` | `/api/bookings` | Submit and record a new travel booking |
 | `GET` | `/api/bookings` | Retrieve all recorded bookings |
 | `DELETE` | `/api/bookings/:id` | Cancel/delete a booking record |
-| `GET` | `/api/destinations` | Retrieve popular destination list |
+| `GET` | `/api/destinations` | Retrieve popular destination list (6 destinations) |
 
 ---
 

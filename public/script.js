@@ -1,120 +1,131 @@
+// Handle Destination Explore Click
 function showDestination(place) {
-    // Select the destination in the booking form
     const destinationSelect = document.getElementById("destination");
+
     if (destinationSelect) {
         destinationSelect.value = place;
-    }
-
-    alert(
-        "🌎 Welcome to " + place + "!\n\n" +
-        "This is a wonderful destination to explore.\n" +
-        "We've pre-selected " + place + " in the booking form below!"
-    );
-
-    // Smooth scroll to the booking section
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
+        alert(
+            "🌎 Welcome to " + place + "!\n\n" +
+            "This is a wonderful destination to explore.\n" +
+            "We've pre-selected " + place + " in the booking form below!"
+        );
+        const contactBox = document.querySelector(".contact-box") || document.getElementById("bookingForm");
+        if (contactBox) {
+            contactBox.scrollIntoView({ behavior: "smooth" });
+        }
+    } else {
+        alert(
+            "🌎 Welcome to " + place + "!\n\n" +
+            "This is a wonderful destination to explore.\n" +
+            "Let's take you to the booking page to plan your trip!"
+        );
+        // Redirect to contact page with pre-selected destination
+        window.location.href = "contact.html?destination=" + encodeURIComponent(place);
     }
 }
 
-function selectPackage(packageName, defaultDestination) {
+// Auto-fill booking form from URL parameters (e.g. contact.html?destination=Japan&package=Standard)
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const destination = params.get("destination");
+    const packageName = params.get("package");
+
     const destinationSelect = document.getElementById("destination");
     const messageInput = document.getElementById("message");
 
-    if (destinationSelect && defaultDestination) {
-        destinationSelect.value = defaultDestination;
+    if (destinationSelect && destination) {
+        destinationSelect.value = destination;
     }
 
-    if (messageInput) {
-        messageInput.value = "I am interested in the " + packageName + " Package.";
-    }
-
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-}
-
-// Handle Booking Form Submission
-document.getElementById("bookingForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const destination = document.getElementById("destination").value;
-    const message = document.getElementById("message").value.trim();
-
-    const submitBtn = document.getElementById("submitBtn");
-    const submitBtnText = document.getElementById("submitBtnText");
-    const submitSpinner = document.getElementById("submitSpinner");
-    const successMessage = document.getElementById("successMessage");
-    const errorMessage = document.getElementById("errorMessage");
-    const bookingDetailsText = document.getElementById("bookingDetailsText");
-
-    // Form validation
-    if (!name) {
-        alert("⚠️ Please enter your name.");
-        return;
-    }
-    if (!email) {
-        alert("⚠️ Please enter your email.");
-        return;
-    }
-    if (!destination) {
-        alert("⚠️ Please select a destination.");
-        return;
-    }
-
-    // Enter loading state
-    submitBtn.disabled = true;
-    submitBtnText.textContent = "Processing Booking...";
-    submitSpinner.classList.remove("d-none");
-    successMessage.style.display = "none";
-    errorMessage.classList.add("d-none");
-
-    try {
-        const response = await fetch("/api/bookings", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                destination: destination,
-                message: message
-            })
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-            // Display rich success message
-            const bookingId = data.bookingId ? `#${data.bookingId}` : "";
-            bookingDetailsText.innerHTML = `
-                Your booking <strong>${bookingId}</strong> for <strong>${destination}</strong> has been saved to the database.<br>
-                A confirmation has been recorded for <strong>${name}</strong> (${email}).
-            `;
-            successMessage.style.display = "block";
-            document.getElementById("bookingForm").reset();
-
-            // Refresh modal list in background
-            fetchBookings();
-        } else {
-            throw new Error(data.error || "Failed to submit booking.");
-        }
-    } catch (err) {
-        console.error("Booking error:", err);
-        errorMessage.textContent = "⚠️ " + (err.message || "Failed to connect to backend server.");
-        errorMessage.classList.remove("d-none");
-    } finally {
-        // Reset loading state
-        submitBtn.disabled = false;
-        submitBtnText.textContent = "Submit Booking ✈️";
-        submitSpinner.classList.add("d-none");
+    if (messageInput && packageName) {
+        messageInput.value = "I am interested in booking the " + packageName + " Package.";
     }
 });
+
+// Handle Booking Form Submission
+const bookingForm = document.getElementById("bookingForm");
+if (bookingForm) {
+    bookingForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const destination = document.getElementById("destination").value;
+        const message = document.getElementById("message").value.trim();
+
+        const submitBtn = document.getElementById("submitBtn");
+        const submitBtnText = document.getElementById("submitBtnText");
+        const submitSpinner = document.getElementById("submitSpinner");
+        const successMessage = document.getElementById("successMessage");
+        const errorMessage = document.getElementById("errorMessage");
+        const bookingDetailsText = document.getElementById("bookingDetailsText");
+
+        // Form validation
+        if (!name) {
+            alert("⚠️ Please enter your name.");
+            return;
+        }
+        if (!email) {
+            alert("⚠️ Please enter your email.");
+            return;
+        }
+        if (!destination) {
+            alert("⚠️ Please select a destination.");
+            return;
+        }
+
+        // Enter loading state
+        if (submitBtn) submitBtn.disabled = true;
+        if (submitBtnText) submitBtnText.textContent = "Recording in Database...";
+        if (submitSpinner) submitSpinner.classList.remove("d-none");
+        if (successMessage) successMessage.style.display = "none";
+        if (errorMessage) errorMessage.classList.add("d-none");
+
+        try {
+            const response = await fetch("/api/bookings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    destination: destination,
+                    message: message
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                const bookingId = data.bookingId ? `#${data.bookingId}` : "";
+                if (bookingDetailsText) {
+                    bookingDetailsText.innerHTML = `
+                        Your booking <strong>${bookingId}</strong> for <strong>${destination}</strong> has been saved to the MySQL database.<br>
+                        Confirmation recorded for <strong>${escapeHtml(name)}</strong> (${escapeHtml(email)}).
+                    `;
+                }
+                if (successMessage) successMessage.style.display = "block";
+                bookingForm.reset();
+
+                // Refresh modal table in background
+                fetchBookings();
+            } else {
+                throw new Error(data.error || "Failed to save booking to database.");
+            }
+        } catch (err) {
+            console.error("Booking error:", err);
+            if (errorMessage) {
+                errorMessage.textContent = "⚠️ " + (err.message || "Failed to connect to backend server.");
+                errorMessage.classList.remove("d-none");
+            }
+        } finally {
+            if (submitBtn) submitBtn.disabled = false;
+            if (submitBtnText) submitBtnText.textContent = "Submit Booking ✈️";
+            if (submitSpinner) submitSpinner.classList.add("d-none");
+        }
+    });
+}
 
 // Fetch and render bookings for the Modal Table
 async function fetchBookings() {
@@ -136,7 +147,7 @@ async function fetchBookings() {
                 tableBody.innerHTML = `
                     <tr>
                         <td colspan="7" class="text-center text-muted py-4">
-                            No bookings found in database yet. Submit your first trip above!
+                            No bookings found in database yet. Submit your first trip on the Contact page!
                         </td>
                     </tr>
                 `;

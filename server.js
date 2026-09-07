@@ -113,12 +113,14 @@ app.get('/api/destinations', (req, res) => {
             { id: 1, name: 'Bali', country: 'Indonesia', price: 9999, tag: 'Tropical' },
             { id: 2, name: 'Paris', country: 'France', price: 19999, tag: 'Culture' },
             { id: 3, name: 'Switzerland', country: 'Switzerland', price: 29999, tag: 'Mountains' },
-            { id: 4, name: 'Maldives', country: 'Maldives', price: 24999, tag: 'Beaches' }
+            { id: 4, name: 'Maldives', country: 'Maldives', price: 24999, tag: 'Beaches' },
+            { id: 5, name: 'Japan', country: 'Japan', price: 27999, tag: 'Tradition & Modern' },
+            { id: 6, name: 'Dubai', country: 'UAE', price: 34999, tag: 'Luxury & Desert' }
         ]
     });
 });
 
-// Fallback to index.html for Single-Page Navigation
+// Fallback to index.html for unknown routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
